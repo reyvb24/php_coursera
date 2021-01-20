@@ -1,7 +1,7 @@
 <?php
 
 // Demand a GET parameter
-if ( ! isset($_GET['name']) || strlen($_GET['name']) < 1  ) {
+if ( ! isset($_GET['name'] ) || strlen($_GET['name']) < 1  ) {
     die('Name parameter missing');
 }
 
@@ -16,7 +16,7 @@ if ( isset($_POST['logout']) ) {
 $names = array('Rock', 'Paper', 'Scissors');
 $human = isset($_POST["human"]) ? $_POST['human']+0 : -1;
 
-$computer = 0; // Hard code the computer to rock
+$computer = rand(0,2); // Hard code the computer to rock
 // TODO: Make the computer be random
 // $computer = rand(0,2);
 
@@ -26,11 +26,11 @@ $computer = 0; // Hard code the computer to rock
 function check($computer, $human) {
     // For now this is a rock-savant checking function
     // TODO: Fix this
-    if ( $human == 0 ) {
+    if ( $human == $computer ) {
         return "Tie";
-    } else if ( $human == 1 ) {
+    } else if ( $human == ($computer+1)%3 ) {
         return "You Win";
-    } else if ( $human == 2 ) {
+    } else if ( $computer == ($human+1)%3 ) {
         return "You Lose";
     }
     return false;
@@ -43,17 +43,17 @@ $result = check($computer, $human);
 <!DOCTYPE html>
 <html>
 <head>
-<title>Dr. Chuck's Rock, Paper, Scissors Game</title>
+<title>370cacee</title>
 <?php require_once "bootstrap.php"; ?>
 </head>
 <body>
 <div class="container">
 <h1>Rock Paper Scissors</h1>
 <?php
-if ( isset($_REQUEST['name']) ) {
-    echo "<p>Welcome: ";
-    echo htmlentities($_REQUEST['name']);
-    echo "</p>\n";
+if ( isset($_GET['name']) ) {
+    echo "Welcome: ";
+    echo htmlentities($_GET['name']);
+    echo "\n";
 }
 ?>
 <form method="post">
